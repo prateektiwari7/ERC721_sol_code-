@@ -17,3 +17,7 @@ Run the mint and owner of token functions.
 ![Screenshot](Mint.png)
 
 #### Similary check the others functions and use it for unique tokens creations. 
+
+
+
+

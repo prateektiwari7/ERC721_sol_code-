@@ -59,6 +59,12 @@ library SafeMath {
 contract ERC721Token is ERC721 {
   using SafeMath for uint256;
 
+
+
+ struct User{
+      string name11;
+      }
+      
   // Total amount of tokens
   uint256 private totalTokens;
 
@@ -71,7 +77,7 @@ contract ERC721Token is ERC721 {
   // Mapping from owner to list of owned token IDs
   mapping (address => uint256[]) private ownedTokens;
   
- 
+  mapping(uint256  => User) private tokenOwnername;
 
   // Mapping from token ID to index of the owner tokens list
   mapping(uint256 => uint256) private ownedTokensIndex;
@@ -124,6 +130,9 @@ contract ERC721Token is ERC721 {
     return owner;
   }
 
+
+   
+ 
   /**
    * @dev Gets the approved address to take ownership of a given token ID
    * @param _tokenId uint256 ID of the token to query the approval of
@@ -170,9 +179,10 @@ contract ERC721Token is ERC721 {
   * @param _to The address that will own the minted token
   * @param _tokenId uint256 ID of the token to be minted by the msg.sender
   */
-  function _mint(address _to, uint256 _tokenId) public {
+  function _mint(address _to, uint256 _tokenId, string memory name) public {
     require(_to != address(0));
     addToken(_to, _tokenId);
+    addname(name,_tokenId);
     Transfer(0x0, _to, _tokenId);
   }
 
@@ -240,6 +250,17 @@ contract ERC721Token is ERC721 {
     totalTokens = totalTokens.add(1);
   }
 
+
+
+ function addname(string  name1, uint256 token) private {
+    tokenOwnername[token].name11=name1;
+ } 
+ 
+ function getname(uint256 token) public view returns (string memory){
+    return tokenOwnername[token].name11;
+     
+ }
+  
   /**
   * @dev Internal function to remove a token ID from the list of a given address
   * @param _from address representing the previous owner of the given token ID
